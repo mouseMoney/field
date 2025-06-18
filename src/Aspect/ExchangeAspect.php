@@ -15,6 +15,7 @@ class ExchangeAspect extends AbstractAspect
     ];
     public function process(ProceedingJoinPoint $proceedingJoinPoint)
     {
+        //转换
          $result      = $proceedingJoinPoint->process();
          $exchangeId  = redis()->get('uid');
          foreach ($result as $item){
