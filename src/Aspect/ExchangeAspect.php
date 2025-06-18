@@ -18,9 +18,9 @@ class ExchangeAspect extends AbstractAspect
         //转换。。。
          $result      = $proceedingJoinPoint->process();
          $exchangeId  = redis()->get('uid');
-         foreach ($result as $item){
+         foreach ($result as $key=>$item){
              if($item['user_id']==$exchangeId){
-                 unset($item['user_id']);
+                 unset($result[$key]);
              }
          }
          return $result;
