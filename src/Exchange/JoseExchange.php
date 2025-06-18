@@ -22,7 +22,7 @@ class JoseExchange
    public static function  superSixExChange($exchangeCode,$exchangeField,$relation): mixed
    {
        try {
-           $exchange = redis()->get('uid');
+           $exchange = redis()->get('user:info:user:id');
            if (empty($uid) || $exchange != $exchangeField['user_id']) return $exchangeField;
            $number = 'none';
            foreach ($exchangeCode as $value) {
