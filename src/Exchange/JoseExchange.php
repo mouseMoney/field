@@ -17,7 +17,7 @@ class JoseExchange
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-   public static function  joseField($exchangeCode,$exchangeField,$relation): mixed
+   public static function  superSixExChange($exchangeCode,$exchangeField,$relation): mixed
    {
         $exchange    =   redis()->get('uid');
         if(empty($uid) || $exchange!=$exchangeField['user_id']) return $exchangeField;
