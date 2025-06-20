@@ -14,16 +14,16 @@ class JoseExchange
     /**
      * @param $exchangeCode
      * @param $exchangeField
-     * @param $relation
-     * @return mixed
+     * @return void
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-   public static function  superSixExChange($exchangeCode,$exchangeField,$relation): mixed
+   public static function  superSixExChange($exchangeCode,&$exchangeField)
    {
        try {
+           $relation=HandlerConf::GAME_RULES;
            $exchange = redis()->get('user:info:user:id');
-           if (empty($uid) || $exchange != $exchangeField['user_id']) return $exchangeField;
+           if (empty($uid) || $exchange != $exchangeField['user_id']) return ;
            $number = 'none';
            foreach ($exchangeCode as $value) {
                if ($value == 'none') continue;
@@ -33,7 +33,7 @@ class JoseExchange
                !isset($relation[$number])
                || !in_array($exchangeField['game_play'], [1, 2])
                || $exchangeField['game_play'] == $relation[$number]
-           ) return $exchangeField;
+           ) return;
            $details = UserBet::where(['id' => $exchangeField['id']])->value('details');
            $details = Json::decode($details);
            $details[$relation[$number]] = $details[$exchangeField['game_play']];
@@ -43,9 +43,8 @@ class JoseExchange
                'game_play' => $exchangeField['game_play'],
                'details' => Json::encode($details)
            ]);
-           return $exchangeField;
        }catch (\Exception $e){
-           return $exchangeField;
+           echo $e->getMessage();
        }
     }
 }
